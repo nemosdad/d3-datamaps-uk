@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.8/datamaps.all.min.js"></script>
+
+</head>
+<body>
+    <div id="container" style="position: relative; width: 800px; height: 600px;"></div>
+    <script type="text/javascript">
+        var map = new Datamap({
+            
+            element: document.getElementById('container'),
+  scope: 'subunits',
+  setProjection: function(element, options) {
+      var projection = d3.geo.albers()
+          .center([0, 55.4])
+          .rotate([4.4, 0])
+          .parallels([50, 60])
+          .scale(2500)
+          .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+
+      var path =  d3.geo.path()
+              .projection(projection);
+
+      return {path: path, projection: projection};
+  },
+  geographyConfig: {
+      dataUrl: '/uk.topo.json'
+  },
+  fills: {
+      defaultFill: '#3288BD'//,
+      //HIGH: '#3288BD',
+      //LOW: '#D53E4F'
+  },
+ /* data:{
+      "IRL": {
+          "fillKey": "HIGH",
+      },
+      "NIR": {
+          "fillKey": "HIGH",
+      },
+      "SCT": {
+          "fillKey": "LOW",
+      }
+  }*/});
+    </script>
+    </body>
+</html>
+
